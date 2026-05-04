@@ -107,11 +107,7 @@ export default function Photos() {
       await refreshProfile();
       navigate('/dashboard');
     } catch (e) {
-      setError(
-        e.message?.includes('JSON')
-          ? 'Не удалось обработать фото. Убедись что фото чёткие и попробуй ещё раз.'
-          : 'Ошибка анализа. Проверь API-ключ Gemini и попробуй снова.'
-      );
+      setError(e.message || 'Неизвестная ошибка');
       setAnalyzing(false);
       setAnalysisStep('');
     }
