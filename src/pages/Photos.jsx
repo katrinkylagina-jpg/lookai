@@ -187,7 +187,6 @@ export default function Photos() {
                 ref={(el) => (fileInputs.current[slot.id] = el)}
                 type="file"
                 accept="image/*"
-                capture="environment"
                 className="hidden"
                 onChange={(e) => handleFileChange(slot.id, e.target.files[0])}
               />

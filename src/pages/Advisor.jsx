@@ -163,7 +163,6 @@ export default function Advisor() {
           ref={fileRef}
           type="file"
           accept="image/*"
-          capture="environment"
           className="hidden"
           onChange={(e) => handleFile(e.target.files[0])}
         />
