@@ -6,3 +6,8 @@ dist/
 
 # Vite cache
 .vite/
+
+# Утилиты установки (не нужны в репо)
+gh.zip
+gh_installer.msi
+gh_cli/
