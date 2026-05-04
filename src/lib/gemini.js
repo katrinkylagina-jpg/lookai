@@ -32,8 +32,8 @@ function parseJSON(text) {
 
 // ─── 1. Анализ профиля по 4 фото ───────────────────────────────────────────
 
-export async function analyzeProfile({ eyePhoto, hairSkinPhoto, facePhoto, bodyPhoto, height }) {
-  const prompt = buildProfilePrompt(height);
+export async function analyzeProfile({ eyePhoto, hairSkinPhoto, facePhoto, bodyPhoto, height, gender }) {
+  const prompt = buildProfilePrompt(height, gender);
 
   const parts = [
     { text: prompt },
@@ -51,6 +51,7 @@ export async function analyzeProfile({ eyePhoto, hairSkinPhoto, facePhoto, bodyP
 
 export async function generateOutfit({
   profile,
+  gender,
   styleVector,
   stylePreference,
   occasion,
@@ -59,6 +60,7 @@ export async function generateOutfit({
 }) {
   const prompt = buildOutfitPrompt({
     profile,
+    gender,
     styleVector,
     stylePreference,
     occasion,

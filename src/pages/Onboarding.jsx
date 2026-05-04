@@ -78,7 +78,8 @@ export default function Onboarding() {
   const navigate = useNavigate();
   const { user, refreshProfile } = useAuth();
 
-  const [step, setStep] = useState('welcome'); // welcome | test | height
+  const [step, setStep] = useState('gender'); // gender | welcome | test | height
+  const [gender, setGender] = useState('female');
   const [currentQ, setCurrentQ] = useState(0);
   const [answers, setAnswers] = useState({});
   const [height, setHeight] = useState(165);
@@ -104,12 +105,54 @@ export default function Onboarding() {
     const styleVector = Object.keys(answers).length > 0 ? calcStyleVector(answers) : null;
     await saveUserProfile(user.uid, {
       height,
+      gender,
       styleVector,
       onboardingComplete: true,
     });
     await refreshProfile();
     navigate('/photos');
   };
+
+  // ─── Пол ─────────────────────────────────────────────────────────────────
+
+  if (step === 'gender') {
+    return (
+      <div className="min-h-screen flex flex-col items-center justify-center px-6 py-12">
+        <div className="w-full max-w-xs text-center">
+          <div className="text-6xl mb-6">✦</div>
+          <h2 className="font-playfair text-3xl font-bold text-cream mb-2">Добро пожаловать</h2>
+          <p className="text-muted mb-10">Для кого подбираем образ?</p>
+          <div className="flex gap-4">
+            <button
+              className={`flex-1 py-6 rounded-2xl border-2 transition-all flex flex-col items-center gap-3 ${
+                gender === 'female'
+                  ? 'border-gold bg-gold/10 text-gold'
+                  : 'border-surface text-muted hover:border-gold/40'
+              }`}
+              onClick={() => setGender('female')}
+            >
+              <span className="text-4xl">👩</span>
+              <span className="font-semibold text-cream">Девушка</span>
+            </button>
+            <button
+              className={`flex-1 py-6 rounded-2xl border-2 transition-all flex flex-col items-center gap-3 ${
+                gender === 'male'
+                  ? 'border-gold bg-gold/10 text-gold'
+                  : 'border-surface text-muted hover:border-gold/40'
+              }`}
+              onClick={() => setGender('male')}
+            >
+              <span className="text-4xl">👨</span>
+              <span className="font-semibold text-cream">Парень</span>
+            </button>
+          </div>
+          <button className="btn-primary w-full mt-8" onClick={() => setStep('welcome')}>
+            Продолжить →
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   // ─── Welcome ────────────────────────────────────────────────────────────
 

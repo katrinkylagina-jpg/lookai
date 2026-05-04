@@ -24,11 +24,18 @@ export default function Profile() {
           <h2 className="font-playfair text-2xl font-bold text-cream">Мой профиль</h2>
         </div>
 
-        {/* Телефон */}
+        {/* Основные данные */}
         <div className="card mb-4">
-          <p className="text-muted text-xs mb-1">Аккаунт</p>
-          <p className="text-cream font-medium">{user?.phoneNumber || '—'}</p>
-          <p className="text-muted text-xs mt-1">Рост: {profile?.height ? `${profile.height} см` : '—'}</p>
+          <div className="flex gap-4">
+            <div>
+              <p className="text-muted text-xs mb-1">Пол</p>
+              <p className="text-cream font-medium">{profile?.gender === 'male' ? '👨 Парень' : '👩 Девушка'}</p>
+            </div>
+            <div>
+              <p className="text-muted text-xs mb-1">Рост</p>
+              <p className="text-cream font-medium">{profile?.height ? `${profile.height} см` : '—'}</p>
+            </div>
+          </div>
         </div>
 
         {/* Вектор стиля */}

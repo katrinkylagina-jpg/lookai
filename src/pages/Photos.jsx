@@ -90,6 +90,7 @@ export default function Photos() {
         facePhoto: photos.facePhoto,
         bodyPhoto: photos.bodyPhoto,
         height: profile?.height || 165,
+        gender: profile?.gender || 'female',
       });
 
       setAnalysisStep('Сохраняю твой профиль...');
@@ -107,7 +108,14 @@ export default function Photos() {
       await refreshProfile();
       navigate('/dashboard');
     } catch (e) {
-      setError(e.message || 'Неизвестная ошибка');
+      const msg = e.message || '';
+      setError(
+        msg.includes('429') || msg.includes('quota')
+          ? 'Превышен лимит запросов Gemini. Подожди минуту и попробуй снова.'
+          : msg.includes('JSON') || msg.includes('невалидный')
+          ? 'Не удалось обработать фото. Убедись что фото чёткие и попробуй ещё раз.'
+          : 'Ошибка анализа: ' + (msg.slice(0, 120) || 'неизвестная ошибка')
+      );
       setAnalyzing(false);
       setAnalysisStep('');
     }

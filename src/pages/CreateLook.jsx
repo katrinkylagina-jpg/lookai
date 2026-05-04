@@ -37,6 +37,7 @@ export default function CreateLook() {
 
   const analysisProfile = profile?.analysisProfile;
   const styleVector = profile?.styleVector || 'Классический';
+  const gender = profile?.gender || 'female';
 
   const runGeneration = async () => {
     if (!user || !analysisProfile) return;
@@ -52,6 +53,7 @@ export default function CreateLook() {
     try {
       const outfit = await generateOutfit({
         profile: analysisProfile,
+        gender,
         styleVector,
         stylePreference: stylePreference || 'ai_choice',
         occasion,
